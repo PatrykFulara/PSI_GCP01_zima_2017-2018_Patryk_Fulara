@@ -2,13 +2,15 @@
 #include<ctime>
 #include<cstdlib>
 
+#define NUMBER_OF_DATA 10
+
 using namespace std;
 
 int main()
 {
 	srand(time(NULL));
 
-	const float LEARNING_RATE = 0.001;
+	const float LEARNING_RATE = 0.1;
 	const float THRESHOLD = 0.2;
 
 	int krok = 1;
@@ -23,12 +25,18 @@ int main()
 	cout << "LEARNING RATE = " << LEARNING_RATE << endl;
 	cout << "THRESHOLD = " << THRESHOLD << endl;
 
-	//dane wejsciowe dla bramki AND
-	int inputs[4][3] = {
+	//dane ucz¹ce
+	int inputs[NUMBER_OF_DATA][3] = {
 		{0,0,0},
 		{0,1,0},
 		{1,0,0},
-		{1,1,1}
+		{1,1,1},
+		{ 1,1,1 },
+		{ 1,0,0 },
+		{ 0,1,0 },
+		{ 1,1,1 },
+		{ 0,0,0 },
+		{ 1,1,1 }
 	};
 
 	int output;
@@ -41,7 +49,8 @@ int main()
 		cout << krok;
 		globalError = 0;
 
-		for (int i = 0; i < 4; i++) {
+		//petla reprezentujaca jedna epoke, przechodzi po wszystkich danych wejsciowych
+		for (int i = 0; i < NUMBER_OF_DATA; i++) {
 
 			cout << "\t" << inputs[i][0] << "\t" << inputs[i][1] << "\t";
 
@@ -71,6 +80,7 @@ int main()
 			cout << w1 << "\t" << w2 << endl;
 		}
 		krok++;
+		cout << endl;
 	} while (globalError != 0); //dopoki istnieja bledy
 
 	system("PAUSE");
